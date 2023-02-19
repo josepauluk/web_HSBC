@@ -1,0 +1,41 @@
+{% extends 'post/base.html' %}
+{% load static %}
+
+{% block titulo %} Inicio {% endblock titulo %}
+
+{% block contenido %}
+
+
+<div class="container h-100">
+  <div class="row h-100 align-items-center">
+    <div class="col-12 text-center">
+      <h1 class="my-1 titulo-h1 tit-responsive">
+        FOTOS
+      </h1>
+      <p class="lead"></p>
+    </div>
+  </div>
+</div>
+  
+<section id="gallery">
+  <div class="container">
+    <div class="row">
+      {% for post in posts %}
+      <div class="d-flex p-2">
+        <div class="">
+          <img src="{{post.foto.url}}"  width="150" height="150"  alt="">
+        </div>
+      </div>
+
+        
+          {% if request.user == post.user %}
+          <a class="btn btn-primary" href="#">Editar Post</a>
+          <a class="btn btn-danger" href="#">Borrar Post</a>
+          {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+ 
+{% endblock contenido %}
