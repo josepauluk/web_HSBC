@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse_lazy
-#from .forms import LoginForm
+#from .forms import EmailAuthenticationForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
@@ -8,6 +8,9 @@ from django.contrib.auth.decorators import login_required
 #from .forms import EmailLoginView
 #from .forms import EmailValidationOnLoginForm
 from django.contrib.auth.views import LoginView
+from django.views.generic import FormView
+from .forms import CustomUserLoginForm
+from django.shortcuts import redirect
 '''
 def login_view(request):
     form = LoginForm()
@@ -55,3 +58,19 @@ class EmailLoginView(LoginView):
     template_name = 'users/login.html'
     authentication_form = EmailValidationOnLoginForm
 '''
+
+class CustomUserLoginView(FormView):
+    template_name = 'login.html'
+    form_class = CustomUserLoginForm
+
+    def form_valid(self, form):
+        email = form.cleaned_data.get('email')
+        password = form.cleaned_data.get('password')
+        user = authenticate(email=email, password=password)
+
+        if user is not None:
+            login(self.request, user)
+            return redirect('home')
+        else:
+            form.add_error(None, 'El correo electrónico o la contraseña son incorrectos')
+            return self.form_invalid(form)
