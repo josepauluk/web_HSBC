@@ -31,6 +31,13 @@ ALLOWED_IMG = ('.jpg', '.jpeg', '.bmp', '.png')
 LOGIN_REDIRECT_URL = reverse_lazy('post_list')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'users.backends.EmailBackend',
+]
+
+AUTH_USER_MODEL = 'users.CustomUser'
+
 # Application definition
 
 INSTALLED_APPS = [

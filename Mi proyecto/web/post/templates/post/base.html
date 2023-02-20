@@ -23,15 +23,15 @@
             {% if user.is_authenticated %}
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <h5 class="nav-link" href="{% url 'upload' %}">
+                  <a class="nav-link" href="{% url 'post_list' %}">
                     Galería
-                  </h5>
+                  </a>
                 </li>
                 
                 
                 <li class="nav-item">
                   <h5 class="nav-link" href="{% url 'upload' %}">
-                    Hola {{user.username | upper }}
+                    Hola {{user.first_name | upper }} {{user.last_name | upper }}
                   </h5>
                 </li>
       
