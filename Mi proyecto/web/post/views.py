@@ -5,17 +5,19 @@ from .models import Post
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 
 
 
 
+@login_required
 def post_list(request):
     posts = Post.objects.all()
     return render(request, 'post/post_list.html', {'posts': posts})
 
 
-
+@login_required
 def MultipleImages(request):
     if request.method == "POST":
         fotos = request.FILES.getlist('images')

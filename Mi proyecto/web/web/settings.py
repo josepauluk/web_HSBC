@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.urls import reverse_lazy
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 ALLOWED_IMG = ('.jpg', '.jpeg', '.bmp', '.png')
+LOGIN_REDIRECT_URL = reverse_lazy('post_list')
+LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 # Application definition
 
@@ -38,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_bootstrap5',
+    'crispy_forms',
+    'users',
     'post',
 ]
 
